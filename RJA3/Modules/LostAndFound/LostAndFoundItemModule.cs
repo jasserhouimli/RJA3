@@ -1,5 +1,5 @@
 ﻿using RJA3.Modules.LostAndFound.Domain;
-using RJA3.Modules.LostAndFound.Features.LostItems.ReportLostItem;
+using RJA3.Modules.LostAndFound.Features.ReportLostItem;
 using RJA3.Modules.LostAndFound.Persistence;
 
 namespace RJA3.Modules.LostAndFound

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RJA3.Modules.LostAndFound.Features.LostItems.ReportLostItem
+namespace RJA3.Modules.LostAndFound.Features.ReportLostItem
 {
     public static class ReportLostItemEndpoint
     {

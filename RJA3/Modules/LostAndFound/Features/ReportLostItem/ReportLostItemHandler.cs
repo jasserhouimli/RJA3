@@ -1,7 +1,7 @@
 ﻿using RJA3.Modules.LostAndFound.Domain;
-using RJA3.Modules.LostAndFound.Features.LostItems.Domain;
+using RJA3.Modules.LostAndFound.Features.ReportLostItem;
 
-namespace RJA3.Modules.LostAndFound.Features.LostItems.ReportLostItem;
+namespace RJA3.Modules.LostAndFound.Features.ReportLostItem;
 
 public sealed class ReportLostItemHandler
 {
