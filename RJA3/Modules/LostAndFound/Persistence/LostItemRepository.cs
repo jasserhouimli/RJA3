@@ -1,6 +1,6 @@
-﻿using RJA3.Modules.LostAndFound.Features.LostItems.Domain;
+﻿using RJA3.Modules.LostAndFound.Domain;
 
-namespace RJA3.Modules.LostAndFound.Features.LostItems.Persistence
+namespace RJA3.Modules.LostAndFound.Persistence
 {
     public class LostItemRepository : ILostItemRepository
     {

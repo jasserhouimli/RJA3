@@ -1,4 +1,4 @@
-﻿namespace RJA3.Modules.LostAndFound.Features.LostItems.Domain
+﻿namespace RJA3.Modules.LostAndFound.Domain
 {
     public enum LostItemStatus
     {
