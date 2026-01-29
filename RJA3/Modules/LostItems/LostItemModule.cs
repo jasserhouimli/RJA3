@@ -4,6 +4,7 @@ using RJA3.Modules.LostItems.Features.ReportLostItem;
 using RJA3.Modules.LostItems.Features.GetReportLostItemById;
 using RJA3.Modules.LostItems.Persistence;
 using System.Runtime.CompilerServices;
+using FluentValidation;
 
 namespace RJA3.Modules.LostItems
 {
@@ -12,6 +13,9 @@ namespace RJA3.Modules.LostItems
 
         public static IServiceCollection AddLostItemServices(this IServiceCollection services , IConfiguration conf)
         {
+            services.AddValidatorsFromAssemblyContaining<GetReportLostItemAllQuery>();
+            services.AddValidatorsFromAssemblyContaining<ReportLostItemCommand>();
+            services.AddValidatorsFromAssemblyContaining<GetReportLostItemByIdQuery>();
             services.AddScoped<ReportLostItemHandler>();
             services.AddScoped<GetReportLostItemByIdHandler>();
             services.AddScoped<GetReportLostItemAllHandler>();
