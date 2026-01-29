@@ -2,7 +2,7 @@
 {
     public enum LostItemStatus
     {
-        Reported,
+        ReportedLost,
         Found,
         Returned,
         Closed

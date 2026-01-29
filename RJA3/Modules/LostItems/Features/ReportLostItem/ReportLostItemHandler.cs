@@ -1,17 +1,12 @@
 ﻿using RJA3.Modules.LostAndFound.Domain;
 using RJA3.Modules.LostAndFound.Features.ReportLostItem;
+using RJA3.Modules.LostAndFound.Persistence;
 
 namespace RJA3.Modules.LostAndFound.Features.ReportLostItem;
 
-public sealed class ReportLostItemHandler
+public sealed class ReportLostItemHandler(ILostItemRepository lostItemRep)
 {
-    private readonly ILostItemRepository _repository;
-
-    public ReportLostItemHandler(ILostItemRepository repository)
-    {
-        _repository = repository;
-    }
-
+    
     public async Task<ReportLostItemResult> Handle(ReportLostItemCommand command)
     {
 
@@ -19,15 +14,16 @@ public sealed class ReportLostItemHandler
         LostItem item = command.ItemType switch
         {
             LostItemType.Phone => new PhoneLostItem(
-                command.UserId,
-                command.DateLost,
+                Guid.NewGuid().ToString(), //// USERID FOR TESTING
+                DateTime.UtcNow, /// DATE JUST NOW FOR TESTING
                 command.LocationLost,
                 command.Brand!,
                 command.Model!,
-                command.Color!),
+                command.Color!
+            ),
         };
 
-        await _repository.AddAsync(item);
+        await lostItemRep.AddAsync(item);
 
         return new ReportLostItemResult
         {
@@ -35,13 +31,19 @@ public sealed class ReportLostItemHandler
         };
 
     }
+
+    public async Task<List<LostItem>> Handle()
+    {
+        var result = await lostItemRep.GetAllLostItemsAsync();
+
+        return result;
+    }
 }
+
 
 public sealed class ReportLostItemResult
 {
-    public Guid LostItemId { get; init; }
-
-
+    public string LostItemId { get; init; }
 
 }
 

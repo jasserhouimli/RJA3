@@ -6,13 +6,13 @@ namespace RJA3.Modules.LostAndFound.Features.ReportLostItem
     {
         public LostItemType ItemType { get; init; }
 
-        public Guid UserId { get; init; }
+        public string UserId { get; init; }
 
         public string Description { get; init; }
 
         public string LocationLost { get; init; }
 
-        public DateTime DateLost { get; init; }
+       
 
         // Phone properties
 

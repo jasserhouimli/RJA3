@@ -2,8 +2,8 @@
 
 public abstract class LostItem
 {
-    public Guid Id { get; private set; }
-    public Guid OwnerId { get; private set; }
+    public string Id { get; private set; }
+    public string OwnerId { get; private set; }
     public DateTime LostAt { get; private set; }
     public string Location { get; private set; } = default!;
     public LostItemStatus Status { get; protected set; }
@@ -13,20 +13,20 @@ public abstract class LostItem
     protected LostItem() { } 
 
     protected LostItem(
-        Guid ownerId,
+        string ownerId,
         DateTime lostAt,
         string location)
     {
-        if (ownerId == Guid.Empty)
+        if (ownerId == string.Empty)
             throw new ArgumentException("OwnerId is required");
 
         if (string.IsNullOrWhiteSpace(location))
             throw new ArgumentException("Location is required");
 
-        Id = Guid.NewGuid();
+        Id = Guid.NewGuid().ToString();
         OwnerId = ownerId;
         LostAt = lostAt;
         Location = location;
-        Status = LostItemStatus.Reported;
+        Status = LostItemStatus.ReportedLost;
     }
 }

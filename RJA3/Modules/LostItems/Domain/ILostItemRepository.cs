@@ -4,5 +4,7 @@
     {
         Task AddAsync(LostItem lostItem);
 
+        Task<List<LostItem>> GetAllLostItemsAsync();
+
     }
 }
