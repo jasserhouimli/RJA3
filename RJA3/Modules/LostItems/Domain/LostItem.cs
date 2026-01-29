@@ -10,6 +10,9 @@ public abstract class LostItem
 
     public LostItemType ItemType { get; protected set; }
 
+
+    // public string LostItemImageUrl { get; set; } = default!; // it will be useful later when Q/A system is implemented
+
     protected LostItem() { } 
 
     protected LostItem(

@@ -20,10 +20,15 @@ namespace RJA3.Modules.LostAndFound.Persistence
             await Task.CompletedTask;
         }
 
+        public async Task<LostItem?> GetLostItemByIdAsync(string lostItemId)
+        {
+            var result =  await _lostItemDbContext.LostItems.FirstOrDefaultAsync(li => li.Id == lostItemId);
+            return result;
+        }
+
         public async Task<List<LostItem>> GetAllLostItemsAsync()
         {
             var result = await _lostItemDbContext.LostItems.ToListAsync();
-            //throw new NotImplementedException();
             return result;
         }
 

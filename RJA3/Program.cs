@@ -21,8 +21,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var api = app.MapGroup($"/api/{builder.Configuration["apiSettings:api_version"]}");
+var api = app.MapGroup($"/api/{builder.Configuration["apiSettings:api_version"]}").WithTags("RJA3 API V1");
 
-api.MapLostItemEndpoints();
+var lostItems = api.MapGroup("/").WithTags("LostItems");
+lostItems.MapLostItemEndpoints();
 
 app.Run();

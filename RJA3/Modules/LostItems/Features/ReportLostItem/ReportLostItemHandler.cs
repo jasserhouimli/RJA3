@@ -32,12 +32,6 @@ public sealed class ReportLostItemHandler(ILostItemRepository lostItemRep)
 
     }
 
-    public async Task<List<LostItem>> Handle()
-    {
-        var result = await lostItemRep.GetAllLostItemsAsync();
-
-        return result;
-    }
 }
 
 

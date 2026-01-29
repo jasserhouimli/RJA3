@@ -19,13 +19,6 @@ namespace RJA3.Modules.LostAndFound.Features.ReportLostItem
                 return Results.Ok(result);
             });
 
-            app.MapGet("/lostitems/ping", async (ReportLostItemHandler handler) => {
-
-                var result = await handler.Handle();
-
-                return Results.Ok(result);
-
-            });
 
             return app;
         }
