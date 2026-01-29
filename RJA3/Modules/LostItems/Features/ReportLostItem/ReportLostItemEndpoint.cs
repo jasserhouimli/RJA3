@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RJA3.Modules.LostAndFound.Persistence;
+using RJA3.Modules.LostItems.Persistence;
 
-namespace RJA3.Modules.LostAndFound.Features.ReportLostItem
+namespace RJA3.Modules.LostItems.Features.ReportLostItem
 {
     public static class ReportLostItemEndpoint
     {

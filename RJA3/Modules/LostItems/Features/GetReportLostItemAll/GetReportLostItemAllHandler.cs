@@ -1,4 +1,4 @@
-using RJA3.Modules.LostAndFound.Domain;
+using RJA3.Modules.LostItems.Domain;
 
 public sealed class GetReportLostItemAllHandler(ILostItemRepository _lostItemRepository)
 {

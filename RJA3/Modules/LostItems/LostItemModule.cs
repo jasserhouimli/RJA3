@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RJA3.Modules.LostAndFound.Domain;
-using RJA3.Modules.LostAndFound.Features.ReportLostItem;
+using RJA3.Modules.LostItems.Domain;
+using RJA3.Modules.LostItems.Features.ReportLostItem;
 using RJA3.Modules.LostItems.Features.GetReportLostItemById;
-using RJA3.Modules.LostAndFound.Persistence;
+using RJA3.Modules.LostItems.Persistence;
 using System.Runtime.CompilerServices;
 
 namespace RJA3.Modules.LostItems

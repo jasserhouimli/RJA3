@@ -1,8 +1,8 @@
-﻿using RJA3.Modules.LostAndFound.Domain;
-using RJA3.Modules.LostAndFound.Features.ReportLostItem;
-using RJA3.Modules.LostAndFound.Persistence;
+﻿using RJA3.Modules.LostItems.Domain;
+using RJA3.Modules.LostItems.Features.ReportLostItem;
+using RJA3.Modules.LostItems.Persistence;
 
-namespace RJA3.Modules.LostAndFound.Features.ReportLostItem;
+namespace RJA3.Modules.LostItems.Features.ReportLostItem;
 
 public sealed class ReportLostItemHandler(ILostItemRepository lostItemRep)
 {

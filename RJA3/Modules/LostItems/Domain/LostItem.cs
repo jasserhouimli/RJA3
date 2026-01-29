@@ -1,4 +1,4 @@
-﻿namespace RJA3.Modules.LostAndFound.Domain;
+﻿namespace RJA3.Modules.LostItems.Domain;
 
 public abstract class LostItem
 {
