@@ -1,20 +1,30 @@
-﻿using RJA3.Modules.LostItems.Domain;
+﻿using FluentValidation;
+using RJA3.Modules.LostAndFound.Domain;
+using RJA3.Modules.LostItems.Domain;
 using RJA3.Modules.LostItems.Features.ReportLostItem;
 using RJA3.Modules.LostItems.Persistence;
+using RJA3.Shared;
 
 namespace RJA3.Modules.LostItems.Features.ReportLostItem;
 
-public sealed class ReportLostItemHandler(ILostItemRepository lostItemRep)
+public sealed class ReportLostItemHandler(ILostItemRepository _lostItemRep , IValidator<ReportLostItemCommand> _validator)
 {
     
-    public async Task<ReportLostItemResult> Handle(ReportLostItemCommand command)
+    public async Task<Result<ReportLostItemResult>> Handle(ReportLostItemCommand command)
     {
+
+
+        var validationResult = await _validator.ValidateAsync(command);
+        if (!validationResult.IsValid)
+        {
+            return Result<ReportLostItemResult>.Failure(string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage)));
+        }
 
 
         LostItem item = command.ItemType switch
         {
             LostItemType.Phone => new PhoneLostItem(
-                Guid.NewGuid().ToString(), //// USERID FOR TESTING
+                Guid.NewGuid().ToString(), //// USERID FOR TESTING UNTIL I IMPLEMENT AUTH
                 DateTime.UtcNow, /// DATE JUST NOW FOR TESTING
                 command.LocationLost,
                 command.Brand!,
@@ -23,12 +33,12 @@ public sealed class ReportLostItemHandler(ILostItemRepository lostItemRep)
             ),
         };
 
-        await lostItemRep.AddAsync(item);
+        await _lostItemRep.AddAsync(item);
 
-        return new ReportLostItemResult
+        return Result<ReportLostItemResult>.Success(new ReportLostItemResult
         {
             LostItemId = item.Id
-        };
+        });
 
     }
 
@@ -40,4 +50,3 @@ public sealed class ReportLostItemResult
     public string LostItemId { get; init; }
 
 }
-

@@ -16,7 +16,14 @@ namespace RJA3.Modules.LostItems.Features.ReportLostItem
             {
                 var result = await handler.Handle(cmd);
 
-                return Results.Ok(result);
+                if (result.IsSuccess)
+                {
+                    return Results.Ok(result.Data);
+                }
+                else
+                {
+                    return Results.BadRequest(result.Error);
+                }
             });
 
 

@@ -12,12 +12,17 @@ public static class GetReportLostItemByIdEndpoint
             var query = new GetReportLostItemByIdQuery(lostItemId);
             var result = await handler.Handle(query);
 
-            if (result == null)
+            if(result.IsSuccess == false)
+            {
+                return Results.BadRequest(result.Error);
+            }
+
+            if (result.Data == null)
             {
                 return Results.NotFound();
             }
 
-            return Results.Ok(result);
+            return Results.Ok(result.Data);
         });
 
         return app;

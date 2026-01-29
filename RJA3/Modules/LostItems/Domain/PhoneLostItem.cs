@@ -1,4 +1,6 @@
-﻿namespace RJA3.Modules.LostItems.Domain
+﻿using RJA3.Modules.LostItems.Domain;
+
+namespace RJA3.Modules.LostAndFound.Domain
 {
     public class PhoneLostItem : LostItem
     {

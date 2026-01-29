@@ -8,7 +8,6 @@ namespace RJA3.Modules.LostItems.Features.ReportLostItem
 
         public string UserId { get; init; }
 
-        public string Description { get; init; }
 
         public string LocationLost { get; init; }
 
