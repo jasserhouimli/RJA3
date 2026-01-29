@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RJA3.Modules.LostItems.Persistence;
 
 #nullable disable
 
-namespace RJA3.Migrations
+namespace RJA3.Modules.LostItems.Migrations
 {
     [DbContext(typeof(LostItemDbContext))]
-    partial class LostItemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260129123639_LostItemsInitial")]
+    partial class LostItemsInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace RJA3.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("RJA3.Modules.LostAndFound.Domain.LostItem", b =>
+            modelBuilder.Entity("RJA3.Modules.LostItems.Domain.LostItem", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -56,7 +59,7 @@ namespace RJA3.Migrations
 
             modelBuilder.Entity("RJA3.Modules.LostAndFound.Domain.PhoneLostItem", b =>
                 {
-                    b.HasBaseType("RJA3.Modules.LostAndFound.Domain.LostItem");
+                    b.HasBaseType("RJA3.Modules.LostItems.Domain.LostItem");
 
                     b.Property<string>("Brand")
                         .IsRequired()

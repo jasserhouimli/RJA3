@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using RJA3.Modules.LostAndFound.Domain;
 using RJA3.Modules.LostItems.Domain;
 
@@ -9,6 +10,23 @@ namespace RJA3.Modules.LostItems.Persistence
         public LostItemDbContext(DbContextOptions<LostItemDbContext> options) : base(options)
         {
             
+        }
+
+        public LostItemDbContext() : base(GetOptions())
+        {
+        }
+
+        private static DbContextOptions<LostItemDbContext> GetOptions()
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var optionsBuilder = new DbContextOptionsBuilder<LostItemDbContext>();
+            optionsBuilder.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
+
+            return optionsBuilder.Options;
         }
 
 

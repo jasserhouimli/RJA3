@@ -31,6 +31,7 @@ public sealed class ReportLostItemHandler(ILostItemRepository _lostItemRep , IVa
                 command.Model!,
                 command.Color!
             ),
+            _ => throw new NotImplementedException($"Item type {command.ItemType} is not supported yet.")
         };
 
         await _lostItemRep.AddAsync(item);
