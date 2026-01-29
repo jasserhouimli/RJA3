@@ -20,15 +20,6 @@ public abstract class FoundItem
         string location,
         List<SecurityQuestion> securityQuestions)
     {
-        if (finderId == string.Empty)
-            throw new ArgumentException("FinderId is required");
-
-        if (string.IsNullOrWhiteSpace(location))
-            throw new ArgumentException("Location is required");
-
-        if (securityQuestions == null || securityQuestions.Count == 0)
-            throw new ArgumentException("At least one security question is required");
-
         Id = Guid.NewGuid().ToString();
         FinderId = finderId;
         FoundAt = foundAt;

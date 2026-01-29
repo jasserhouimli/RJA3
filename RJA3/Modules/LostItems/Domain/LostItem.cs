@@ -20,12 +20,6 @@ public abstract class LostItem
         DateTime lostAt,
         string location)
     {
-        if (ownerId == string.Empty)
-            throw new ArgumentException("OwnerId is required");
-
-        if (string.IsNullOrWhiteSpace(location))
-            throw new ArgumentException("Location is required");
-
         Id = Guid.NewGuid().ToString();
         OwnerId = ownerId;
         LostAt = lostAt;
