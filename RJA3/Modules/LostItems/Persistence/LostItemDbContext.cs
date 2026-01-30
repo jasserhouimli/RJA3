@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using RJA3.Modules.LostAndFound.Domain;
+using RJA3.Modules.LostItems.Domain;
 using RJA3.Modules.LostItems.Domain;
 
 namespace RJA3.Modules.LostItems.Persistence
@@ -38,7 +38,8 @@ namespace RJA3.Modules.LostItems.Persistence
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.OwnerId).IsRequired();
                 entity.Property(e => e.LostAt).IsRequired();
-                entity.Property(e => e.Location).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.Latitude).IsRequired();
+                entity.Property(e => e.Longitude).IsRequired();
                 entity.Property(e => e.Status).IsRequired();
                 entity.Property(e => e.ItemType).IsRequired();
             });

@@ -5,7 +5,8 @@ public abstract class FoundItem
     public string Id { get; private set; }
     public string FinderId { get; private set; }
     public DateTime FoundAt { get; private set; }
-    public string Location { get; private set; } = default!;
+    public double Latitude { get; protected set; }
+    public double Longitude { get; protected set; }
     public FoundItemStatus Status { get; protected set; }
 
     public FoundItemType ItemType { get; protected set; }
@@ -17,13 +18,15 @@ public abstract class FoundItem
     protected FoundItem(
         string finderId,
         DateTime foundAt,
-        string location,
+        double latitude,
+        double longitude,
         List<SecurityQuestion> securityQuestions)
     {
         Id = Guid.NewGuid().ToString();
         FinderId = finderId;
         FoundAt = foundAt;
-        Location = location;
+        Latitude = latitude;
+        Longitude = longitude;
         Status = FoundItemStatus.ReportedFound;
         SecurityQuestions = securityQuestions;
     }

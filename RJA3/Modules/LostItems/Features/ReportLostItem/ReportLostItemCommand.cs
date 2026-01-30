@@ -9,7 +9,9 @@ namespace RJA3.Modules.LostItems.Features.ReportLostItem
         public string UserId { get; init; }
 
 
-        public string LocationLost { get; init; }
+        public double Latitude { get; init; }
+
+        public double Longitude { get; init; }
 
        
 

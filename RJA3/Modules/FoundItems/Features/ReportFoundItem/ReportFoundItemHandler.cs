@@ -30,7 +30,8 @@ public sealed class ReportFoundItemHandler(IFoundItemRepository foundItemRep, IV
             FoundItemType.Phone => new PhoneFoundItem(
                 userId ?? Guid.NewGuid().ToString(),
                 DateTime.UtcNow,
-                command.LocationFound,
+                command.Latitude,
+                command.Longitude,
                 command.Brand!,
                 command.Model!,
                 command.Color!,
@@ -46,7 +47,7 @@ public sealed class ReportFoundItemHandler(IFoundItemRepository foundItemRep, IV
             FoundItemId = item.Id
         });
 
-    }
+}
 
 }
 

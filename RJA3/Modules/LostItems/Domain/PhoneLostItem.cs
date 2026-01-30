@@ -1,16 +1,14 @@
 ﻿using RJA3.Modules.LostItems.Domain;
 
-namespace RJA3.Modules.LostAndFound.Domain
+namespace RJA3.Modules.LostItems.Domain
 {
     public class PhoneLostItem : LostItem
     {
-
-
         public PhoneLostItem() { }
         public string Brand { get; set; }
         public string Color { get; set; }
         public string Model { get; set; }
-        public PhoneLostItem(string ownerId, DateTime dateLost, string locationLost ,string brand , string model , string color ) : base(ownerId, dateLost, locationLost)
+        public PhoneLostItem(string ownerId, DateTime dateLost, double latitude, double longitude, string brand , string model , string color ) : base(ownerId, dateLost, latitude, longitude)
         {
             Brand = brand;
             Color = color;

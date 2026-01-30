@@ -5,7 +5,8 @@ namespace RJA3.Modules.FoundItems.Features.ReportFoundItem
     public sealed class ReportFoundItemCommand
     {
         public FoundItemType ItemType { get; set; }
-        public string LocationFound { get; set; } = default!;
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public string? Brand { get; set; }
         public string? Model { get; set; }
         public string? Color { get; set; }

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RJA3.Modules.LostAndFound.Domain;
+using RJA3.Modules.LostItems.Domain;
 using RJA3.Modules.LostItems.Domain;
 using RJA3.Modules.LostItems.Features.ReportLostItem;
 using RJA3.Modules.LostItems.Persistence;
@@ -26,7 +26,8 @@ public sealed class ReportLostItemHandler(ILostItemRepository _lostItemRep , IVa
             LostItemType.Phone => new PhoneLostItem(
                 Guid.NewGuid().ToString(), //// USERID FOR TESTING UNTIL I IMPLEMENT AUTH
                 DateTime.UtcNow, /// DATE JUST NOW FOR TESTING
-                command.LocationLost,
+                command.Latitude,
+                command.Longitude,
                 command.Brand!,
                 command.Model!,
                 command.Color!

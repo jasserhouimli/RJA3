@@ -9,7 +9,8 @@ public class ReportLostItemValidator : AbstractValidator<ReportLostItemCommand>
     public ReportLostItemValidator()
     {
         RuleFor(x => x.ItemType).IsInEnum().WithMessage("ItemType must be a valid enum value.");
-        RuleFor(x => x.LocationLost).NotEmpty().WithMessage("LocationLost must not be empty.");
+        RuleFor(x => x.Latitude).InclusiveBetween(-90, 90).WithMessage("Latitude must be between -90 and 90.");
+        RuleFor(x => x.Longitude).InclusiveBetween(-180, 180).WithMessage("Longitude must be between -180 and 180.");
 
         When(x => x.ItemType == LostItemType.Phone, () =>
         {

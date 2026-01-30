@@ -8,7 +8,7 @@ namespace RJA3.Modules.FoundItems.Domain
         public string Brand { get; set; }
         public string Color { get; set; }
         public string Model { get; set; }
-        public PhoneFoundItem(string finderId, DateTime dateFound, string locationFound ,string brand , string model , string color, List<SecurityQuestion> securityQuestions ) : base(finderId, dateFound, locationFound, securityQuestions)
+        public PhoneFoundItem(string finderId, DateTime dateFound, double latitude, double longitude ,string brand , string model , string color, List<SecurityQuestion> securityQuestions ) : base(finderId, dateFound, latitude, longitude, securityQuestions)
         {
             Brand = brand;
             Color = color;

@@ -44,6 +44,14 @@ namespace RJA3.Modules.FoundItems.Persistence
             return new PaginatedResult<FoundItem>(items, totalCount, pageNumber, pageSize);
         }
 
+        public async Task<List<FoundItem>> GetFoundItemsByTypeAsync(FoundItemType itemType)
+        {
+            var result = await _foundItemDbContext.FoundItems
+                .Where(fi => fi.ItemType == itemType)
+                .ToListAsync();
+            return result;
+        }
+
 
     }
 }

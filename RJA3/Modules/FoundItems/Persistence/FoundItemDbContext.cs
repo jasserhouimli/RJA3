@@ -37,7 +37,8 @@ namespace RJA3.Modules.FoundItems.Persistence
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.FinderId).IsRequired();
                 entity.Property(e => e.FoundAt).IsRequired();
-                entity.Property(e => e.Location).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.Latitude).IsRequired();
+                entity.Property(e => e.Longitude).IsRequired();
                 entity.Property(e => e.Status).IsRequired();
                 entity.Property(e => e.ItemType).IsRequired();
                 entity.OwnsMany(e => e.SecurityQuestions, sq =>
