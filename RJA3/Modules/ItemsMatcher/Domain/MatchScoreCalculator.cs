@@ -55,7 +55,7 @@ public class MatchScoreCalculator
                 return new MatchResult { MatchScore = score, DistanceInMeters = distance };
 
 
-            // Add cases for other item types here
+           
 
             default:
                 _logger.LogInformation("Unknown item type {Type}, returning score 0", lostItem.ItemType);

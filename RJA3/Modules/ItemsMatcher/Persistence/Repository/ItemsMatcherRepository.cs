@@ -58,7 +58,7 @@ public class ItemsMatcherRepository : IItemsMatcherRepository
             
         }
 
-        var sortedMatches = matches.OrderByDescending(m => m.MatchScore).ThenBy(m => m.DistanceInMeters).ToList();
+        var sortedMatches = matches.Where(m => m.MatchScore > 0).OrderByDescending(m => m.MatchScore).ThenBy(m => m.DistanceInMeters).ToList();
 
         return sortedMatches;
 
