@@ -1,0 +1,48 @@
+using FluentValidation;
+using RJA3.Modules.Items.FoundItems.Domain;
+using RJA3.Shared;
+
+namespace RJA3.Modules.Items.FoundItems.Features.ReportFoundItem;
+
+public sealed class ReportFoundItemHandler(IFoundItemRepository foundItemRep, IValidator<ReportFoundItemCommand> validator)
+{
+    
+    public async Task<Result<ReportFoundItemResult>> Handle(ReportFoundItemCommand command, string userId)
+    {
+
+        var validationResult = await validator.ValidateAsync(command);
+        if (!validationResult.IsValid)
+        {
+            return Result<ReportFoundItemResult>.Failure(string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage)));
+        }
+
+        FoundItem item = command.ItemType switch
+        {
+            FoundItemType.Phone => new PhoneFoundItem(
+                userId,
+                DateTime.UtcNow,
+                command.Latitude,
+                command.Longitude,
+                command.Brand!,
+                command.Model!,
+                command.Color!,
+                command.SecurityQuestions
+            ),
+            _ => throw new NotImplementedException($"Item type {command.ItemType} is not supported yet.")
+        };
+
+        await foundItemRep.AddAsync(item);
+
+        return Result<ReportFoundItemResult>.Success(new ReportFoundItemResult
+        {
+            FoundItemId = item.Id
+        });
+
+}
+
+}
+
+public sealed class ReportFoundItemResult
+{
+    public string FoundItemId { get; init; }
+}

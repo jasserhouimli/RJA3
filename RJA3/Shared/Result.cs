@@ -15,4 +15,5 @@ public class Result<T>
 
     public static Result<T> Success(T data) => new Result<T>(true, data, null);
     public static Result<T> Failure(string error) => new Result<T>(false, default, error);
+
 }

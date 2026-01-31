@@ -1,1 +1,0 @@
-public record GetReportLostItemAllQuery(int PageNumber = 1, int PageSize = 10);
