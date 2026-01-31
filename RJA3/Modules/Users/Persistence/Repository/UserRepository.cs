@@ -12,9 +12,9 @@ public class UserRepository : IUserRepository
         _userDbContext = userDbContext;
     }
 
-    public async Task<Result<UserDto>> GetMe(ClaimsPrincipal claims)
+    public async Task<Result<UserDto>> GetMe(ClaimsPrincipal userClaims)
     {
-        var user = await _userDbContext.UserProfiles.FirstOrDefaultAsync(e => e.UserId == claims.GetUserId());
+        var user = await _userDbContext.UserProfiles.AsNoTracking().FirstOrDefaultAsync(e => e.UserId == userClaims.GetUserId());
 
         if (user == null)
         {

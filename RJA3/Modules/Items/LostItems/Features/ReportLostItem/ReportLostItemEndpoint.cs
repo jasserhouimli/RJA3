@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using RJA3.Shared;
 
 namespace RJA3.Modules.Items.LostItems.Features.ReportLostItem
@@ -12,9 +13,9 @@ namespace RJA3.Modules.Items.LostItems.Features.ReportLostItem
                       
 
 
-            app.MapPost("/lostitems/add", async ([FromBody] ReportLostItemCommand cmd, ReportLostItemHandler handler, HttpContext httpContext) =>
+            app.MapPost("/lostitems/add", async ([FromBody] ReportLostItemCommand cmd, ReportLostItemHandler handler, ClaimsPrincipal userClaims) =>
             {
-                var userId = httpContext.User.GetUserId();
+                var userId = userClaims.GetUserId();
                 if (userId == null)
                 {
                     return Results.Unauthorized();

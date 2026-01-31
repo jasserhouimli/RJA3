@@ -16,6 +16,10 @@ namespace RJA3.Modules.Items.LostItems.Features.GetReportLostItemById
                 return Result<LostItem>.Failure(string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage)));
             }
             var result = await _lostItemRepository.GetLostItemByIdAsync(query.LostItemId);
+            if (result == null)
+            {
+                return Result<LostItem>.Failure("Lost item not found");
+            }
             return Result<LostItem>.Success(result);
         }
 

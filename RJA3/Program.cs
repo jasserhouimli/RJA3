@@ -15,9 +15,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen();
 
 builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
-
 builder.Services.AddSingleton<IEventBus, InMemoryEventBus>();
-
 builder.Services.AddLostItemServices(builder.Configuration);
 builder.Services.AddFoundItemServices(builder.Configuration);
 builder.Services.AddItemMatcherServices();

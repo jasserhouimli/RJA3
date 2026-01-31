@@ -55,12 +55,12 @@ public static class AuthModule
         });
 
         services.AddAuthorization();
-
+        services.AddAuthentication();
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IRefreshTokenService, RefreshTokenService>();
         services.AddScoped<RegisterHandler>();
         services.AddScoped<LoginHandler>();
-        services.AddScoped<Features.RefreshToken.RefreshTokenHandler>();
+        services.AddScoped<RefreshTokenHandler>();
 
         return services;
     }
