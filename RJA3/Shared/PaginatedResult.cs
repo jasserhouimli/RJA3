@@ -15,4 +15,6 @@ public class PaginatedResult<T>
         PageNumber = pageNumber;
         PageSize = pageSize;
     }
+
+     
 }

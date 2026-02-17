@@ -27,7 +27,7 @@ namespace RJA3.Modules.Items.LostItems
             services.AddScoped<ILostItemRepository, LostItemRepository>();
             return services;
         }
-
+        
 
         public static IEndpointRouteBuilder MapLostItemEndpoints(this IEndpointRouteBuilder app)
         {

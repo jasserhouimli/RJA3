@@ -3,8 +3,6 @@ using System.Security.Claims;
 public static class GetMeEndpoint
 {
 
-
-
     public static IEndpointRouteBuilder MapGetMeEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapGet("/api/users/me", async (GetMeHandler getMeHandler, ClaimsPrincipal userClaims) =>
