@@ -1,54 +1,74 @@
-# RJA3
+# RJA3 — Lost & Found Item Matching API
 
-RJA3 is a C# solution hosted in this repository. This README provides a concise overview, build/run instructions, and a brief description of the repository layout to help contributors and users get started.
+Modular monolith API built with ASP.NET Core 10.0. Users report lost/found items; the system matches them using a scoring algorithm.
 
-## Repository language
-- C# (primary)
-- Dockerfile (small percentage)
+## Stack
 
-## Requirements
-- .NET SDK (compatible with the project; use a recent SDK such as .NET 6/7/8 depending on local setup)
-- Git
+.NET 10, PostgreSQL, JWT Bearer, ASP.NET Core Identity, EF Core, FluentValidation, Docker.
 
-## Build
-From the repository root, you can build the solution with the .NET CLI:
+## Quick Start
 
 ```bash
-# restore dependencies and build
-dotnet restore
-dotnet build
-```
-
-## Run
-If the solution contains runnable projects, use `dotnet run` inside the project folder you want to run. For example:
-
-```bash
+dotnet restore && dotnet build
+# Requires appsettings.json with ConnectionStrings:PostgreSQL, Jwt:Key/Issuer/Audience, apiSettings:api_version
 cd RJA3
+dotnet ef database update
 dotnet run
 ```
 
-(Adjust the project path if the runnable project is in a different subfolder.)
+Dev docs at `/scalar/v1` or `/swagger`.
 
-## Project structure (high level)
-- .gitattributes
-- .gitignore
-- RJA3.slnx — solution file
-- RJA3/ — main project directory (C# source)
-- launchSettings.json
+## API
 
-## Tests
-If there are test projects included in the solution, run them with:
+Prefix: `/api/v1` (configurable). Auth-protected endpoints require `Authorization: Bearer <token>`.
 
-```bash
-dotnet test
-```
+### Auth
 
-## Usage
-Describe typical usage of the application here. If the project exposes a CLI, API, or UI, add examples and expected inputs/outputs.
+| Method | Path | Body | Description |
+|---|---|---|---|
+| POST | `/auth/register` | `{ userName, email, password }` | Create account |
+| POST | `/auth/login` | `{ email, password }` | Returns `{ accessToken, refreshToken, expiresAt }` |
+| POST | `/auth/refresh-token` | `{ refreshToken }` | Rotate tokens |
 
-## Contributing
-Stop
+### User
 
+| Method | Path | Description |
+|---|---|---|
+| GET | `/api/users/me` | Current user profile |
 
-## License
-If this repository has a license, add a short license section here and reference the LICENSE file. If there is no license yet, consider adding one to make reuse and contribution clear.
+### Lost Items
+
+| Method | Path | Body/Query | Description |
+|---|---|---|---|
+| POST | `/lostitems/add` | `{ itemType, latitude, longitude, brand?, model?, color? }` | Report lost item |
+| GET | `/lostitems` | `?pageNumber=1&pageSize=10` | Paginated list |
+| GET | `/lostitems/{id}` | — | By ID |
+
+### Found Items
+
+| Method | Path | Body/Query | Description |
+|---|---|---|---|
+| POST | `/founditems/add` | `{ itemType, lat, lng, brand?, model?, color?, securityQuestions[] }` | Report found item |
+| GET | `/founditems` | `?ItemType&Brand&Model&Color&PageNumber&PageSize` | Filtered list |
+| GET | `/founditems/{id}` | — | By ID |
+| GET | `/founditems/{id}/securityquestions` | — | Security Qs for claim |
+
+### Matching
+
+| Method | Path | Description |
+|---|---|---|
+| GET | `/items-matcher/lost-items/{lostItemId}/matches` | Returns scored matches against found items |
+
+## Matching Algorithm
+
+Compares lost vs found items of the same type. For phones: brand match (+20 points) + Haversine distance. Currently only phone matching is implemented.
+
+## Modules
+
+- **Auth** — Register, login, JWT + refresh tokens (ASP.NET Identity + PostgreSQL)
+- **Users** — Profile creation via `UserRegisteredEvent`; GetMe endpoint
+- **LostItems** — Report & query lost items (Phone, Document, Other types)
+- **FoundItems** — Report found items with security questions for verification
+- **ItemsMatcher** — Scoring engine that matches lost to found items
+
+Each module has its own EF Core DbContext (bounded context). Cross-module communication uses an in-memory event bus.
